@@ -6,7 +6,7 @@ void main() {
       expect(3, equals(1 + 2));
     });
     test('失敗するテスト', () {
-      expect(9, equals(1 + 2));
+      expect(99, equals(1 + 2));
     });
   });
 }

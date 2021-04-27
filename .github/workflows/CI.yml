@@ -44,6 +44,9 @@ jobs:
       - name: Build (Web)
         run: flutter build web --web-renderer html
 
+      - name: Test
+        run: flutter test
+
       - name: Format
         if: ${{ github.event_name != 'pull_request' }}
         run: flutter format --set-exit-if-changed ./

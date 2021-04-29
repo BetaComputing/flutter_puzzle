@@ -3,6 +3,7 @@ import 'package:flutter_puzzle/puzzle/puzzle.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_board.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_creator.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_page_bloc.dart';
+import 'package:flutter_puzzle/puzzle/puzzle_shuffler.dart';
 import 'package:provider/provider.dart';
 
 /// パズルゲームのページ
@@ -15,6 +16,7 @@ class PuzzlePage extends StatelessWidget {
       create: (context) => PuzzlePageBloc(
         path,
         PuzzleCreator(),
+        PuzzleShuffler(),
       ),
       dispose: (context, bloc) => bloc.dispose(),
       child: _PuzzlePage(),

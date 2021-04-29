@@ -1,5 +1,6 @@
 import 'package:flutter_puzzle/puzzle/puzzle.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_creator.dart';
+import 'package:flutter_puzzle/puzzle/puzzle_shuffler.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,12 +8,13 @@ part 'puzzle_page_bloc.freezed.dart';
 
 /// パズルゲームのページのBLoC
 class PuzzlePageBloc {
-  PuzzlePageBloc(this._assetPath, this._creator) {
+  PuzzlePageBloc(this._assetPath, this._creator, this._shuffler) {
     _initPuzzle();
   }
 
   final String _assetPath;
   final PuzzleCreator _creator;
+  final PuzzleShuffler _shuffler;
 
   final _loadingState = BehaviorSubject.seeded(
     const PuzzleLoadingState.loading(),
@@ -53,6 +55,7 @@ class PuzzlePageBloc {
 
     result.when(
       success: (puzzle) {
+        _shuffler.shuffle(puzzle);
         _updatePuzzle(puzzle);
       },
       failure: (error) {

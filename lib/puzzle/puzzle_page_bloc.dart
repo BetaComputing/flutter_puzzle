@@ -18,12 +18,19 @@ class PuzzlePageBloc {
     const PuzzleLoadingState.loading(),
   );
 
+  //  現在のPuzzle
+  Puzzle? get _puzzle => _loadingState.requireValue
+      .maybeWhen(success: (puzzle) => puzzle, orElse: () => null);
+
   /// パズルの読み込み状態
   Stream<PuzzleLoadingState> get loadingState => _loadingState.stream;
 
   /// ピースが選択されたとき。
   void onPieceSelected(Piece piece) {
-    //  TODO: ピースが選択されたときの処理
+    if (piece.isMovable) {
+      _puzzle!.move(piece);
+      _updatePuzzle(_puzzle!);
+    }
   }
 
   /// 再読み込み処理が要求されたとき。
@@ -46,12 +53,17 @@ class PuzzlePageBloc {
 
     result.when(
       success: (puzzle) {
-        _loadingState.add(PuzzleLoadingState.success(puzzle));
+        _updatePuzzle(puzzle);
       },
       failure: (error) {
         _loadingState.add(const PuzzleLoadingState.failed());
       },
     );
+  }
+
+  //  Puzzleを更新する。
+  void _updatePuzzle(Puzzle puzzle) {
+    _loadingState.add(PuzzleLoadingState.success(puzzle));
   }
 }
 

@@ -8,13 +8,14 @@ const RESOURCES = {
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "manifest.json": "14a00b42a0dcc7dc1c33bb9072dc7eac",
-"main.dart.js": "bfac82075793b38984f3b64d54bace1c",
+"main.dart.js": "2f24b9602e6b0156c5955a6af8c3eab6",
 "assets/NOTICES": "3bb06eb307dd3b6c7581715f229d1fb2",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/AssetManifest.json": "99914b932bd37a50b983c5e7c90ae93b",
+"assets/AssetManifest.json": "69a1febed3c172e4574d165a3d38d43d",
+"assets/assets/puzzle_img.jpg": "8c9c9cae05f9cb1ce4c9b326a9f508ec",
 "assets/FontManifest.json": "7b2a36307916a9721811788013e65289",
-"index.html": "f7ffd72fd0e9ba0a6cf82d96516b56a9",
-"/": "f7ffd72fd0e9ba0a6cf82d96516b56a9"
+"index.html": "d50293e30f4243ebb0f1f024aad61765",
+"/": "d50293e30f4243ebb0f1f024aad61765"
 };
 
 // The application shell files that are downloaded before a service worker can

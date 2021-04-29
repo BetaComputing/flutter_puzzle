@@ -1,7 +1,6 @@
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_puzzle/puzzle/puzzle.dart';
+import 'package:flutter_puzzle/puzzle/puzzle_board.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_creator.dart';
 
 /// パズルゲームのページ
@@ -18,37 +17,25 @@ class PuzzlePage extends StatelessWidget {
         );
 
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Center(
         child: FutureBuilder<Puzzle?>(
           future: puzzleFuture,
           builder: (context, snapshot) {
-            final puzzleImg = snapshot.data?.img;
+            final puzzle = snapshot.data;
 
-            if (puzzleImg == null) return const CircularProgressIndicator();
+            if (puzzle == null) return const CircularProgressIndicator();
 
-            return SizedBox(
-              width: puzzleImg.width.toDouble(),
-              height: puzzleImg.height.toDouble(),
-              child: CustomPaint(painter: _PuzzlePainter(puzzleImg)),
+            return ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: PuzzleBoard(
+                puzzle: puzzle,
+                onPieceSelected: (piece) {},
+              ),
             );
           },
         ),
       ),
     );
   }
-}
-
-class _PuzzlePainter extends CustomPainter {
-  _PuzzlePainter(this.img);
-
-  static final _paint = Paint();
-  final ui.Image img;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.drawImage(img, Offset.zero, _paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

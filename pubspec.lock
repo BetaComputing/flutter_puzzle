@@ -23,12 +23,12 @@ packages:
     source: hosted
     version: "2.1.0"
   async:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.6.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -279,6 +279,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  mockito:
+    dependency: "direct dev"
+    description:
+      name: mockito
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.7"
   nested:
     dependency: transitive
     description:

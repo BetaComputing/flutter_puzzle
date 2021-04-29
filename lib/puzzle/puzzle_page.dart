@@ -5,6 +5,7 @@ import 'package:flutter_puzzle/puzzle/puzzle_creator.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_page_bloc.dart';
 import 'package:flutter_puzzle/puzzle/puzzle_shuffler.dart';
 import 'package:provider/provider.dart';
+import 'package:rxdart/rxdart.dart';
 
 /// パズルゲームのページ
 class PuzzlePage extends StatelessWidget {
@@ -32,6 +33,18 @@ class _PuzzlePage extends StatefulWidget {
 class _PuzzlePageState extends State<_PuzzlePage> {
   static const MaxWidth = 500.0;
 
+  final _compositeSubscription = CompositeSubscription();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final bloc = Provider.of<PuzzlePageBloc>(context);
+    bloc.puzzleCompletedEvent
+        .listen((_) => _showCompletedDialog(bloc))
+        .addTo(_compositeSubscription);
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<PuzzlePageBloc>(context);
@@ -40,6 +53,12 @@ class _PuzzlePageState extends State<_PuzzlePage> {
       backgroundColor: Colors.grey,
       body: Center(child: _buildBody(bloc)),
     );
+  }
+
+  @override
+  void dispose() {
+    _compositeSubscription.dispose();
+    super.dispose();
   }
 
   //  ボディ部を生成する。
@@ -89,6 +108,30 @@ class _PuzzlePageState extends State<_PuzzlePage> {
           child: const Text('再読み込み'),
         ),
       ],
+    );
+  }
+
+  //  完成ダイアログを表示する。
+  void _showCompletedDialog(PuzzlePageBloc bloc) {
+    final dialog = AlertDialog(
+      title: const Text('パズル完成!'),
+      content: const Text('おめでとうございます。もう一度遊びましょう!'),
+      actionsPadding: const EdgeInsets.all(16),
+      actions: [
+        TextButton(
+          onPressed: () {
+            bloc.onReloadRequested();
+            Navigator.of(context).pop();
+          },
+          child: const Text('もう一度'),
+        ),
+      ],
+    );
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => dialog,
     );
   }
 }

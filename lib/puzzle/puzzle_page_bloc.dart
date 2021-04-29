@@ -20,6 +20,8 @@ class PuzzlePageBloc {
     const PuzzleLoadingState.loading(),
   );
 
+  final _puzzleCompletedEvent = PublishSubject<void>();
+
   //  現在のPuzzle
   Puzzle? get _puzzle => _loadingState.requireValue
       .maybeWhen(success: (puzzle) => puzzle, orElse: () => null);
@@ -27,11 +29,20 @@ class PuzzlePageBloc {
   /// パズルの読み込み状態
   Stream<PuzzleLoadingState> get loadingState => _loadingState.stream;
 
+  /// パズルの完成を通知するイベント
+  Stream<void> get puzzleCompletedEvent => _puzzleCompletedEvent.stream;
+
   /// ピースが選択されたとき。
   void onPieceSelected(Piece piece) {
     if (piece.isMovable) {
-      _puzzle!.move(piece);
-      _updatePuzzle(_puzzle!);
+      final puzzle = _puzzle!;
+
+      puzzle.move(piece);
+      _updatePuzzle(puzzle);
+
+      if (puzzle.isCompleted) {
+        _puzzleCompletedEvent.add(null);
+      }
     }
   }
 

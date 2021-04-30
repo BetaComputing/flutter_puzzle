@@ -8,6 +8,10 @@ https://betacomputing.github.io/flutter_puzzle/
 ![Dart](https://img.shields.io/static/v1?label=language&message=Dart&color=00B4AB)
 ![Flutter](https://img.shields.io/static/v1?label=framework&message=Flutter&color=46CAF9)
 
+## 使用ライブラリ
+
+[使用ライブラリ](LIBRARIES.md)
+
 ## コマンド
 
 * 依存関係復元: `flutter pub get`

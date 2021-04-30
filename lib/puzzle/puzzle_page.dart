@@ -63,31 +63,22 @@ class _PuzzlePageState extends State<_PuzzlePage> {
 
   //  ボディ部を生成する。
   Widget _buildBody(PuzzlePageBloc bloc) {
-    return StreamBuilder<Puzzle?>(
-      stream: bloc.puzzle,
+    return StreamBuilder<bool>(
+      stream: bloc.isProgressIndicatorVisible,
+      initialData: true,
       builder: (context, snapshot) {
-        final puzzle = snapshot.data;
+        final isIndicatorVisible = snapshot.requireData;
 
-        return StreamBuilder<bool>(
-          stream: bloc.isProgressIndicatorVisible,
-          initialData: true,
+        return StreamBuilder<Puzzle?>(
+          stream: bloc.puzzle,
           builder: (context, snapshot) {
-            final isIndicatorVisible = snapshot.requireData;
+            final puzzle = snapshot.data;
 
-            return Stack(
-              children: [
-                Visibility(
-                  visible: !isIndicatorVisible,
-                  child: puzzle != null
-                      ? _buildPuzzle(bloc, puzzle)
-                      : _buildErrorMessage(bloc),
-                ),
-                Visibility(
-                  visible: isIndicatorVisible,
-                  child: const CircularProgressIndicator(),
-                ),
-              ],
-            );
+            if (isIndicatorVisible) return const CircularProgressIndicator();
+
+            return puzzle != null
+                ? _buildPuzzle(bloc, puzzle)
+                : _buildErrorMessage(bloc);
           },
         );
       },

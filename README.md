@@ -8,6 +8,10 @@ https://betacomputing.github.io/flutter_puzzle/
 ![Dart](https://img.shields.io/static/v1?label=language&message=Dart&color=00B4AB)
 ![Flutter](https://img.shields.io/static/v1?label=framework&message=Flutter&color=46CAF9)
 
+
+![flutter_puzzle](flutter_puzzle.png)
+
+
 ## 使用ライブラリ
 
 [使用ライブラリ](LIBRARIES.md)

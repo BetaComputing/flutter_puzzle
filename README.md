@@ -8,6 +8,7 @@ https://betacomputing.github.io/flutter_puzzle/
 ![Dart](https://img.shields.io/static/v1?label=language&message=Dart&color=00B4AB)
 ![Flutter](https://img.shields.io/static/v1?label=framework&message=Flutter&color=46CAF9)
 
+記事: https://blog.betacomputing.co.jp/entry/2021/04/30/164311
 
 ![flutter_puzzle](flutter_puzzle.png)
 
